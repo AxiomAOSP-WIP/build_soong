@@ -1197,6 +1197,9 @@ func createVariablePropertiesType(moduleTypeProps []interface{}, productVariable
 	typ, _ := proptools.FilterPropertyStruct(reflect.TypeOf(productVariables),
 		func(field reflect.StructField, prefix string) (bool, reflect.StructField) {
 			// Filter function, returns true if the field should be in the resulting struct
+			if strings.HasPrefix(prefix, "Product_variables.AxiomOS") {
+				_, prefix = splitPrefix(prefix)
+			}
 			if prefix == "" {
 				// Keep the top level Product_variables field
 				return true, field
